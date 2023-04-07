@@ -5,13 +5,18 @@ import authSlice from "./feature/auth/authSlice"
 import rootSaga from "./rootSaga";
 
 const sagaMiddleware = createSagaMiddleware()
-const logger = createLogger()
+const loggerMiddleware = createLogger()
+
+const middleware = (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false
+  }).concat(sagaMiddleware, loggerMiddleware);
 
 const store  = configureStore({
     reducer : {
         auth:authSlice
     },
-    middleware: (getDefalultMiddleware) => getDefalultMiddleware().concat(sagaMiddleware,logger)
+    middleware: middleware
 })
 sagaMiddleware.run(rootSaga)
 export default store;

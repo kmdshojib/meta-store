@@ -1,5 +1,6 @@
-import { getFetchUsers } from '@/app/feature/auth/authSlice'
+import { getFetchUsers, getUserGoogleSignIn, getUsersSuccess } from '@/app/feature/auth/authSlice'
 import Head from 'next/head'
+import Link from 'next/link'
 import React from 'react'
 
 import {FcGoogle} from "react-icons/fc"
@@ -28,13 +29,13 @@ const Login = () => {
 				<div className="w-full max-w-md p-8 space-y-3 rounded-xl shadow-lg">
 					<h1 className="text-2xl font-bold text-center">Login</h1>
 
-					<form onSubmit={handleSubmit} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+					<form onSubmit={handleSubmit} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
 						<div className="space-y-1 text-sm">
-							<label for="username" className="block dark:text-gray-400">Email</label>
+							<label htmlFor="username" className="block dark:text-gray-400">Email</label>
 							<input type="text" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md input input-bordered" />
 						</div>
 						<div className="space-y-1 text-sm">
-							<label for="password" className="block dark:text-gray-400">Password</label>
+							<label htmlFor="password" className="block dark:text-gray-400">Password</label>
 							<input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md input input-bordered" />
 							<div className="flex justify-end text-xs dark:text-gray-400">
 								<a rel="noopener noreferrer" href="#">Forgot Password?</a>
@@ -49,12 +50,12 @@ const Login = () => {
 					</div>
 					<div className="flex justify-center space-x-4">
 						<button aria-label="Log in with Google" className="p-3 rounded-sm">
-							<FcGoogle style={{width:"28px", height:"28px"}}/>
+							<FcGoogle onClick={()=>dispatch(getUserGoogleSignIn())} style={{width:"28px", height:"28px"}}/>
 						</button>
 						
 					</div>
 					<p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
-						<a rel="noopener noreferrer" href="#" className="underline dark:text-gray-100">Sign up</a>
+					<Link rel="noopener noreferrer" href="/register" className="underline dark:text-gray-100">Sign Up</Link>
 					</p>
 				</div>
 			</div>

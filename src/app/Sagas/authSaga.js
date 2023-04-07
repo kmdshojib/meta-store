@@ -1,19 +1,32 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import { app } from "@/firebase/firebase";
-import { getAuth,signInWithEmailAndPassword} from "@/firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getUsersSuccess } from "../feature/auth/authSlice";
 
+
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-function* workFetchUsers (action) {
-    const {email,password} = action.payload;
 
-    const userCredentials = yield call(() => signInWithEmailAndPassword(auth, email, password))
-    const user = userCredentials.user
-    yield put(getUsersSuccess(user))
+function* workFetchUsers(action) {
+  const { email, password } = action.payload;
+
+  const userCredentials = yield call(() => signInWithEmailAndPassword(auth, email, password));
+  const user = yield userCredentials.user;
+  const result = yield user;
+  yield put(getUsersSuccess(result));
 }
 
-function* signInWithEmailPassSaga (){
-    yield("auth/getFetchUsers", workFetchUsers)
+function* workFetchGoogleSignIn() {
+  const userCredentials = yield call(() => signInWithPopup(auth, provider));
+  const user = yield userCredentials.user;
+  const result = yield user;
+  yield put(getUsersSuccess(result));
 }
-export default signInWithEmailPassSaga
+
+function* signInWithEmailPassSaga() {
+  yield takeEvery("auth/getFetchUsers", workFetchUsers);
+  yield takeEvery("auth/getUserGoogleSignIn", workFetchGoogleSignIn);
+}
+
+export default signInWithEmailPassSaga;

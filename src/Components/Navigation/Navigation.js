@@ -24,7 +24,7 @@ const Navigation = () => {
             <li><a>Item 3</a></li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Meta Store</a>
+        <Link href="/" className="btn btn-ghost normal-case text-xl">Meta Store</Link>
       </div>
       <div style={{ marginLeft: "56%" }} className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -40,7 +40,7 @@ const Navigation = () => {
             </ul>
           </li>
           <li><Link href="/login">Login</Link></li>
-          <li><a>Register</a></li>
+          <li><Link href="/register">Register</Link></li>
         </ul>
       </div>
       <div className="navbar-end mr-5 ">

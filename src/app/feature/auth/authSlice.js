@@ -19,9 +19,13 @@ const authSlice = createSlice({
         getUserError: (state) =>{
             state.isLoading = false;
             state.user = null
+        },
+        getUserGoogleSignIn:(state,action) =>{
+            state.isLoading = false;
+            state.user = action.payload
         }
     }
 })
 
-export const {getFetchUsers, getUsersSuccess, getUserError} = authSlice.actions
+export const {getFetchUsers, getUsersSuccess, getUserError,getUserGoogleSignIn} = authSlice.actions
 export default authSlice.reducer
