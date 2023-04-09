@@ -2,18 +2,20 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+/Frontend/node_modules
+/Brontend/node_modules
+/Frontend/.pnp
+/Frontend/.pnp.js
 
 # testing
 /coverage
 
 # next.js
-/.next/
-/out/
+/Frontend/.next/
+/Frontend/out/
 
 # production
-/build
+/Frontend/build
 
 # misc
 .DS_Store
@@ -26,7 +28,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
+/Frontend/.env*.local
 
 # vercel
-.vercel
+/Frontend/.vercel
