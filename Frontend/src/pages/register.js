@@ -13,9 +13,15 @@ const Register = () => {
     const displayName = e.target.name.value
     const email = e.target.email.value
     const password = e.target.password.value
-    const accountType = e.target.password.value
+    const accountType = e.target.accountType.value
     console.log(accountType)
-    dispatch(getUserRegistered({ email, password, displayName }))
+
+    const dbUser = {
+      displayName,
+      email,
+      accountType
+    }
+    dispatch(getUserRegistered({ email, password, displayName, dbUser }))
   }
   return (
     <div>

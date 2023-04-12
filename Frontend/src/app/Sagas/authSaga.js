@@ -2,6 +2,7 @@ import { call, put, takeEvery } from "redux-saga/effects"
 import { app } from "@/firebase/firebase";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
 import { getUsersSuccess } from "../feature/auth/authSlice";
+import instance from "@/axios/axios";
 
 
 const auth = getAuth(app);
@@ -25,12 +26,17 @@ function* workFetchGoogleSignIn() {
 }
 
 function* workGetUserRegistered(action) {
-  const { email, password, displayName } = action.payload
+  const { email, password, displayName, dbUser } = action.payload
   try {
     const userCredentials = yield call(() => createUserWithEmailAndPassword(auth, email, password))
     const user = yield userCredentials.user;
     yield call(() => user, updateProfile(user, { displayName }))
     yield put(getUsersSuccess(user));
+    if (user) {
+      instance.post("/users", dbUser)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
   } catch (e) {
     console.error(e.message);
   }
