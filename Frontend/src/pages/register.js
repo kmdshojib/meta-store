@@ -10,11 +10,12 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = e.target.name.value
+    const displayName = e.target.name.value
     const email = e.target.email.value
     const password = e.target.password.value
-
-    dispatch(getUserRegistered({ email, password }))
+    const accountType = e.target.password.value
+    console.log(accountType)
+    dispatch(getUserRegistered({ email, password, displayName }))
   }
   return (
     <div>
@@ -28,7 +29,7 @@ const Register = () => {
           <form onSubmit={handleSubmit} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
             <div className="space-y-1 text-sm">
               <label htmlFor="username" className="block dark:text-gray-400">Name</label>
-              <input type="text" name="name" id="name" placeholder="Name" className="w-full px-4 py-3 rounded-md input input-bordered" />
+              <input type="text" name="name" id="name" placeholder="Name" className="w-full px-4 py-3 rounded-md input input-bordered" required />
             </div>
             <div className="space-y-1 text-sm">
               <label htmlFor="username" className="block dark:text-gray-400">Email</label>
@@ -44,10 +45,9 @@ const Register = () => {
                 <span className="label-text">Account Type</span>
 
               </label>
-              <select className="select select-bordered">
-                <option disabled selected>Pick one</option>
-                <option>Buyer</option>
-                <option>Seller</option>
+              <select name="accountType" className="select select-bordered">
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
 
               </select>
 

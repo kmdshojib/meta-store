@@ -1,7 +1,12 @@
+import { getUserSignOut } from '@/app/feature/auth/authSlice'
 import Link from 'next/link'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Navigation = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth)
+  console.log(user)
   return (
     <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
@@ -39,8 +44,13 @@ const Navigation = () => {
               <li><a>Women</a></li>
             </ul>
           </li>
-          <li><Link href="/login">Login</Link></li>
-          <li><Link href="/register">Register</Link></li>
+          {
+            user?.user && user?.user.uid ? <li className='mt-3 cursor-pointer' onClick={() => dispatch(getUserSignOut())}>Logout</li> :
+              <>
+                <li><Link href="/login">Login</Link></li>
+                <li><Link href="/register">Register</Link></li>
+              </>
+          }
         </ul>
       </div>
       <div className="navbar-end mr-5 ">
