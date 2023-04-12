@@ -1,25 +1,27 @@
 import { getFetchUsers, getUserGoogleSignIn, getUsersSuccess } from '@/app/feature/auth/authSlice'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 
-import {FcGoogle} from "react-icons/fc"
-import { useDispatch } from 'react-redux'
+import { FcGoogle } from "react-icons/fc"
+import { useDispatch, useSelector } from 'react-redux'
 
 const Login = () => {
-
+	const router = useRouter()
 	const dispatch = useDispatch()
-
+	const user = useSelector(state => state.auth)
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		const email = e.target.email.value
 		const password = e.target.password.value
-
-		dispatch(getFetchUsers({email, password}))
-
-		console.log({email, password})
+		dispatch(getFetchUsers({ email, password }))
+		console.log({ email, password })
 	}
 
+	// if (user?.user?.uid) {
+	// 	router.push("/")
+	// }
 	return (
 		<div>
 			<Head>
@@ -50,12 +52,12 @@ const Login = () => {
 					</div>
 					<div className="flex justify-center space-x-4">
 						<button aria-label="Log in with Google" className="p-3 rounded-sm">
-							<FcGoogle onClick={()=>dispatch(getUserGoogleSignIn())} style={{width:"28px", height:"28px"}}/>
+							<FcGoogle onClick={() => dispatch(getUserGoogleSignIn())} style={{ width: "28px", height: "28px" }} />
 						</button>
-						
+
 					</div>
 					<p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
-					<Link rel="noopener noreferrer" href="/register" className="underline dark:text-gray-100">Sign Up</Link>
+						<Link rel="noopener noreferrer" href="/register" className="underline dark:text-gray-100">Sign Up</Link>
 					</p>
 				</div>
 			</div>
