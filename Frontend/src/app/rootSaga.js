@@ -1,10 +1,9 @@
 import { all } from "redux-saga/effects";
-import signInWithEmailPassSaga from "./Sagas/authSaga";
-import signInWithGoogleSaga from "./Sagas/signInwithGoogleSaga";
+import authSaga from "./Sagas/authSaga";
+
 
 export default function* rootSaga(){
     yield all([
-        signInWithEmailPassSaga(),
-        // signInWithGoogleSaga()
+        authSaga(),
     ])
 }

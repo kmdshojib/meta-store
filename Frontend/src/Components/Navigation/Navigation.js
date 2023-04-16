@@ -44,6 +44,7 @@ const Navigation = () => {
               <li><a>Women</a></li>
             </ul>
           </li>
+          <li><Link href="/addproduct">Add Product</Link></li>
           {
             user?.user && user?.user.uid ? <li className='mt-3 cursor-pointer' onClick={() => dispatch(getUserSignOut())}>Logout</li> :
               <>

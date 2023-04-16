@@ -47,11 +47,11 @@ function* workSignOut() {
   yield put(getUsersSuccess(result));
 }
 
-function* signInWithEmailPassSaga() {
+function* authSaga() {
   yield takeEvery("auth/getFetchUsers", workFetchUsers);
   yield takeEvery("auth/getUserGoogleSignIn", workFetchGoogleSignIn);
   yield takeEvery("auth/getUserRegistered", workGetUserRegistered),
     yield takeEvery("auth/getUserSignOut", workSignOut)
 }
 
-export default signInWithEmailPassSaga;
+export default authSaga;
